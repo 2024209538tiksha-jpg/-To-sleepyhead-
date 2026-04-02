@@ -2,54 +2,120 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You ❤️</title>
+<title>For Sleepyhead 💌</title>
 
 <style>
 body {
-  background: linear-gradient(to right, #ff9a9e, #fad0c4);
-  text-align: center;
+  margin: 0;
+  overflow: hidden;
   font-family: Arial;
-  margin-top: 100px;
+  text-align: center;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
   color: white;
 }
 
 h1 {
-  font-size: 40px;
+  margin-top: 100px;
+  font-size: 36px;
 }
 
 button {
   padding: 12px 25px;
   font-size: 18px;
-  background: white;
-  color: #ff4d6d;
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  margin: 10px;
 }
 
-#message {
-  margin-top: 25px;
+#yes {
+  background: white;
+  color: #ff4d6d;
+}
+
+#no {
+  background: #ff4d6d;
+  color: white;
+  position: absolute;
+}
+
+#text {
+  margin-top: 30px;
   font-size: 24px;
+  min-height: 60px;
+}
+
+/* hearts */
+.heart {
+  position: absolute;
+  bottom: -50px;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-800px);}
 }
 </style>
 </head>
 
 <body>
 
-<h1>Hey you 🥺</h1>
+<h1>Heylo sleepyhead <3 🥺💘</h1>
+<p>Tap slowly… 💌</p>
 
-<p>Click below… I made this for you 💌</p>
+<button onclick="nextMessage()">Start ❤️</button>
 
-<button onclick="showMessage()">Click me ❤️</button>
+<div id="text"></div>
 
-<div id="message"></div>
+<div id="buttons" style="display:none;">
+  <button id="yes">YES 💖</button>
+  <button id="no">NO 😏</button>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav" type="audio/mpeg">
+</audio>
 
 <script>
-function showMessage() {
-  document.getElementById("message").innerHTML = 
-  "I miss you stupid 🥺💘<br><br>3 years ho gaye… still you 🫶<br><br>Distance sucks but I still choose you ❤️<br><br>— from your sleepyhead 💌";
-}
-</script>
+let messages = [
+  "Regardless of our fights 🤪",
+  "I miss u sm here 😔🎀",
+  "Meetup at my place? 😘",
+  "11 April 💌",
+  "— from tikki"
+];
 
-</body>
-</html>
+let index = 0;
+
+function nextMessage() {
+  document.getElementById("bgMusic").play();
+
+  if (index < messages.length) {
+    typeEffect(messages[index]);
+    index++;
+  } else {
+    document.getElementById("buttons").style.display = "block";
+  }
+}
+
+function typeEffect(text) {
+  let i = 0;
+  let speed = 40;
+  document.getElementById("text").innerHTML = "";
+
+  function typing() {
+    if (i < text.length) {
+      document.getElementById("text").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+  typing();
+}
+
+// NO button bhaagega 😂
+let noBtn = document.getElementById("no");
+
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.top = Math.random() * window
