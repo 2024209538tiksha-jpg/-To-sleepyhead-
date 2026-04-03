@@ -20,7 +20,6 @@ h1 {
   margin-top: 120px;
   font-family: 'Playfair Display', serif;
   font-size: 48px;
-  letter-spacing: 1px;
   text-shadow: 0 0 15px rgba(255,255,255,0.7);
 }
 
@@ -32,7 +31,6 @@ h1 {
   transition: all 0.8s ease;
 }
 
-/* buttons */
 button {
   padding: 12px 28px;
   font-size: 18px;
@@ -41,6 +39,11 @@ button {
   margin: 10px;
   cursor: pointer;
   transition: 0.3s;
+}
+
+#start {
+  background: white;
+  color: #ff4d6d;
 }
 
 #yes {
@@ -75,19 +78,27 @@ button {
 
 <h1>Heylo sleepyhead &lt;3</h1>
 
+<button id="start">Start 💖</button>
+
 <div id="text"></div>
 
 <div id="buttons" style="display:none;">
-  <button id="yes">YES 🥺💘</button>
-  <button id="no">NO 😭</button>
+  <button id="yes">YES 😻</button>
+  <button id="no">NO 😾</button>
 </div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 let msgs = [
   "Regardless of our fights 🤪",
   "I miss u sm here 😔🎀",
   "Meetup at my place? 😘",
-  "11 April 🐙",
+  "this weekend 🐙",
+  "It will be worth it, I promise to fill it with laughter, love, and good quality time 😽",
   "— from tikki <3"
 ];
 
@@ -105,7 +116,7 @@ function showMessages() {
       textDiv.style.opacity = 1;
       textDiv.style.transform = "translateY(0)";
       i++;
-      setTimeout(showMessages, 2200);
+      setTimeout(showMessages, 2500);
     }, 400);
 
   } else {
@@ -113,14 +124,19 @@ function showMessages() {
   }
 }
 
-window.onload = showMessages;
+// START BUTTON
+document.getElementById("start").onclick = function() {
+  document.getElementById("start").style.display = "none";
+  document.getElementById("music").play();
+  showMessages();
+};
 
 // YES click
 document.getElementById("yes").onclick = function() {
   document.getElementById("text").innerText = "Yayyy see you soon 💘";
 };
 
-// NO button move 😂
+// NO move 😂
 let no = document.getElementById("no");
 no.onmouseover = function() {
   no.style.top = Math.random() * 80 + "%";
