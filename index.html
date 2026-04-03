@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Meetup 💌</title>
+<title>Meetup</title>
 
 <style>
 body {
@@ -16,14 +16,6 @@ body {
 
 h1 {
   margin-top: 100px;
-}
-
-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  margin: 10px;
-  cursor: pointer;
 }
 
 #text {
@@ -46,48 +38,31 @@ button {
 
 <body>
 
-<h1>Heylo sleepyhead &lt;3 🥺</h1>
-
-<button onclick="nextMsg()">Start ❤️</button>
+<h1>Heylo sleepyhead <3</h1>
 
 <div id="text"></div>
-
-<div id="choice" style="display:none;">
-  <button onclick="yes()">YES 💖</button>
-  <button id="no">NO 😏</button>
-</div>
 
 <script>
 let msgs = [
   "Regardless of our fights 🤪",
   "I miss u sm here 😔🎀",
-  "Meetup at my place? 😘",
-  "11 April 💌",
+  "Meetup at my place?",
+  "11 April",
   "— from tikki"
 ];
 
 let i = 0;
 
-function nextMsg() {
+function showMessages() {
   if (i < msgs.length) {
     document.getElementById("text").innerText = msgs[i];
     i++;
-  } else {
-    document.getElementById("choice").style.display = "block";
+    setTimeout(showMessages, 2000);
   }
 }
 
-function yes() {
-  document.getElementById("text").innerText = "Yayyy see you soon 💘";
-}
-
-// NO button move 😂
-let no = document.getElementById("no");
-no.onmouseover = function() {
-  no.style.position = "absolute";
-  no.style.top = Math.random() * 80 + "%";
-  no.style.left = Math.random() * 80 + "%";
-};
+// auto start (no click)
+showMessages();
 
 // hearts
 setInterval(() => {
