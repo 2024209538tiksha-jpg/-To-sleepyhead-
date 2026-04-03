@@ -38,7 +38,7 @@ h1 {
 
 <body>
 
-<h1>Heylo sleepyhead <3</h1>
+<h1>Heylo sleepyhead &lt;3</h1>
 
 <div id="text"></div>
 
@@ -61,8 +61,8 @@ function showMessages() {
   }
 }
 
-// auto start (no click)
-showMessages();
+// AUTO START (no click needed)
+window.onload = showMessages;
 
 // hearts
 setInterval(() => {
