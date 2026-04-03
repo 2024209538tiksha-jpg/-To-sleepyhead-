@@ -9,10 +9,11 @@
 <style>
 body {
   margin: 0;
-  background: #fff6f7;
-  color: #333;
+  background: #ffffff;
+  color: #000;
   font-family: 'Inter', sans-serif;
   text-align: center;
+  overflow: hidden;
 }
 
 h1 {
@@ -29,41 +30,87 @@ h1 {
   transition: opacity 1.2s ease;
 }
 
-button {
+/* button */
+#start {
   margin-top: 40px;
   padding: 10px 24px;
   border-radius: 25px;
   border: none;
-  background: #ff6b81;
+  background: black;
   color: white;
   font-size: 16px;
   cursor: pointer;
+}
+
+/* yes no */
+#buttons {
+  margin-top: 30px;
+  display: none;
+}
+
+#yes {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: black;
+  color: white;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#no {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: grey;
+  color: white;
+  position: absolute;
+  cursor: pointer;
+}
+
+/* hearts */
+.heart {
+  position: absolute;
+  bottom: -50px;
+  animation: float 6s linear infinite;
+  color: red;
+}
+
+@keyframes float {
+  to { transform: translateY(-900px); }
 }
 </style>
 </head>
 
 <body>
 
-<h1>Heylo sleepyhead &lt;3</h1>
+<h1>heylo sleepyhead &lt;3</h1>
 
 <div id="text"></div>
 
-<button onclick="start()">Open</button>
+<button id="start">tap here…</button>
+
+<div id="buttons">
+  <button id="yes">YES 😻</button>
+  <button id="no">NO 😾</button>
+</div>
 
 <script>
 let msgs = [
-  "Regardless of our fights 🤪",
-  "I miss u sm here 😔🎀",
-  "Meetup at my place? 😘",
-  "this weekend 🐙",
+  "Regardless of our fights… 🤪",
+  "I miss you… more than I say 😔🎀",
+  "So meetup at my place 🎀",
+  "Upcoming weekend 🐙",
   "It will be worth it, I promise to fill it with laughter, love, and good quality time 😽",
-  "— from tikki <3"
+  "It will include good talking session at terrace, endless cuddles, hugs n kisses and your favorite meal with dessert 😋",
+  "ik we'll get through this like we always have 🫂",
+  "— from tikki"
 ];
 
 let i = 0;
 
 function start() {
-  document.querySelector("button").style.display = "none";
+  document.getElementById("start").style.display = "none";
   show();
 }
 
@@ -77,10 +124,37 @@ function show() {
       text.innerText = msgs[i];
       text.style.opacity = 1;
       i++;
-      setTimeout(show, 2500);
+      setTimeout(show, 3000);
     }, 500);
+  } else {
+    document.getElementById("buttons").style.display = "block";
   }
 }
+
+document.getElementById("start").onclick = start;
+
+// YES
+document.getElementById("yes").onclick = function() {
+  document.getElementById("text").innerText = "see you soon 💘";
+};
+
+// NO move 😂
+let no = document.getElementById("no");
+no.onmouseover = function() {
+  no.style.top = Math.random() * 80 + "%";
+  no.style.left = Math.random() * 80 + "%";
+};
+
+// hearts
+setInterval(() => {
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.fontSize = (12 + Math.random()*20) + "px";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}, 400);
 </script>
 
 </body>
