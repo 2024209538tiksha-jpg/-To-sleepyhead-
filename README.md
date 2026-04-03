@@ -1,2 +1,2 @@
 # -To-sleepyhead-
-cute meetup invite &lt;3
+cute invite &lt;3
