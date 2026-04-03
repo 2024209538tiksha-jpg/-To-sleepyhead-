@@ -15,12 +15,35 @@ body {
 }
 
 h1 {
-  margin-top: 100px;
+  margin-top: 120px;
+  font-size: 42px;
 }
 
 #text {
-  margin-top: 30px;
-  font-size: 24px;
+  margin-top: 40px;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+/* buttons */
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#yes {
+  background: white;
+  color: #ff4d6d;
+}
+
+#no {
+  background: #ff4d6d;
+  color: white;
+  position: absolute;
 }
 
 /* hearts */
@@ -42,13 +65,18 @@ h1 {
 
 <div id="text"></div>
 
+<div id="buttons" style="display:none;">
+  <button id="yes">YES</button>
+  <button id="no">NO</button>
+</div>
+
 <script>
 let msgs = [
   "Regardless of our fights 🤪",
   "I miss u sm here 😔🎀",
-  "Meetup at my place?",
-  "11 April",
-  "— from tikki"
+  "Meetup at my place? 😘",
+  "11 April 🐙",
+  "— from tikki <3"
 ];
 
 let i = 0;
@@ -58,13 +86,27 @@ function showMessages() {
     document.getElementById("text").innerText = msgs[i];
     i++;
     setTimeout(showMessages, 2000);
+  } else {
+    document.getElementById("buttons").style.display = "block";
   }
 }
 
-// AUTO START (no click needed)
+// auto start
 window.onload = showMessages;
 
-// hearts
+// YES button
+document.getElementById("yes").onclick = function() {
+  document.getElementById("text").innerText = "Yayyy see you soon 💘";
+};
+
+// NO button moves 😂
+let no = document.getElementById("no");
+no.onmouseover = function() {
+  no.style.top = Math.random() * 80 + "%";
+  no.style.left = Math.random() * 80 + "%";
+};
+
+// floating hearts
 setInterval(() => {
   let h = document.createElement("div");
   h.className = "heart";
