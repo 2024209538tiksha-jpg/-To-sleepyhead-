@@ -2,47 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Sleepyhead 💌</title>
+<title>Meetup 💌</title>
 
 <style>
 body {
   margin: 0;
-  overflow: hidden;
   font-family: Arial;
   text-align: center;
   background: linear-gradient(to right, #ff9a9e, #fad0c4);
   color: white;
+  overflow: hidden;
 }
 
 h1 {
   margin-top: 100px;
-  font-size: 36px;
 }
 
 button {
-  padding: 12px 25px;
-  font-size: 18px;
+  padding: 10px 20px;
   border: none;
   border-radius: 20px;
-  cursor: pointer;
   margin: 10px;
-}
-
-#yes {
-  background: white;
-  color: #ff4d6d;
-}
-
-#no {
-  background: #ff4d6d;
-  color: white;
-  position: absolute;
+  cursor: pointer;
 }
 
 #text {
   margin-top: 30px;
   font-size: 24px;
-  min-height: 60px;
 }
 
 /* hearts */
@@ -53,32 +39,26 @@ button {
 }
 
 @keyframes float {
-  0% {transform: translateY(0);}
-  100% {transform: translateY(-800px);}
+  to { transform: translateY(-800px); }
 }
 </style>
 </head>
 
 <body>
 
-<h1>Heylo sleepyhead <3 🥺💘</h1>
-<p>Tap slowly… 💌</p>
+<h1>Heylo sleepyhead &lt;3 🥺</h1>
 
-<button onclick="nextMessage()">Start ❤️</button>
+<button onclick="nextMsg()">Start ❤️</button>
 
 <div id="text"></div>
 
-<div id="buttons" style="display:none;">
-  <button id="yes">YES 💖</button>
+<div id="choice" style="display:none;">
+  <button onclick="yes()">YES 💖</button>
   <button id="no">NO 😏</button>
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav" type="audio/mpeg">
-</audio>
-
 <script>
-let messages = [
+let msgs = [
   "Regardless of our fights 🤪",
   "I miss u sm here 😔🎀",
   "Meetup at my place? 😘",
@@ -86,36 +66,39 @@ let messages = [
   "— from tikki"
 ];
 
-let index = 0;
+let i = 0;
 
-function nextMessage() {
-  document.getElementById("bgMusic").play();
-
-  if (index < messages.length) {
-    typeEffect(messages[index]);
-    index++;
+function nextMsg() {
+  if (i < msgs.length) {
+    document.getElementById("text").innerText = msgs[i];
+    i++;
   } else {
-    document.getElementById("buttons").style.display = "block";
+    document.getElementById("choice").style.display = "block";
   }
 }
 
-function typeEffect(text) {
-  let i = 0;
-  let speed = 40;
-  document.getElementById("text").innerHTML = "";
-
-  function typing() {
-    if (i < text.length) {
-      document.getElementById("text").innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typing, speed);
-    }
-  }
-  typing();
+function yes() {
+  document.getElementById("text").innerText = "Yayyy see you soon 💘";
 }
 
-// NO button bhaagega 😂
-let noBtn = document.getElementById("no");
+// NO button move 😂
+let no = document.getElementById("no");
+no.onmouseover = function() {
+  no.style.position = "absolute";
+  no.style.top = Math.random() * 80 + "%";
+  no.style.left = Math.random() * 80 + "%";
+};
 
-noBtn.addEventListener("mouseover", () => {
-  noBtn.style.top = Math.random() * window
+// hearts
+setInterval(() => {
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "💖";
+  h.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 5000);
+}, 400);
+</script>
+
+</body>
+</html>
