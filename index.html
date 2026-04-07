@@ -9,8 +9,8 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   text-align: center;
-  background: white;   /* FIXED */
-  color: black;        /* FIXED */
+  background: white;
+  color: black;
   overflow: hidden;
 }
 
@@ -19,25 +19,20 @@ h1 {
   font-size: 42px;
 }
 
-#messages {
-  margin-top: 40px;
-}
-
 .msg {
-  font-size: 26px;
+  font-size: 24px;
   margin-top: 20px;
   opacity: 0;
   transition: opacity 1s ease;
 }
 
-/* buttons */
 button {
   padding: 12px 25px;
   font-size: 18px;
-  border: none;
   border-radius: 25px;
-  margin: 10px;
+  border: none;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 #yes {
@@ -53,13 +48,13 @@ button {
 
 /* hearts */
 .heart {
-  position: absolute;
-  bottom: -50px;
+  position: fixed;
+  bottom: -20px;
   animation: float 6s linear infinite;
 }
 
 @keyframes float {
-  to { transform: translateY(-900px); }
+  to { transform: translateY(-100vh); }
 }
 </style>
 </head>
@@ -68,17 +63,15 @@ button {
 
 <h1>Heylo sleepyhead &lt;3</h1>
 
-<button onclick="startMessages()">Tap here</button>
+<button onclick="start()">Tap here</button>
 
-<div id="messages">
-  <div class="msg">Regardless of our fights 🤪</div>
-  <div class="msg">I miss u sm here 😔🎀</div>
-  <div class="msg">Meetup at my place? 😘</div>
-  <div class="msg">Upcoming weekend 🐙</div>
-  <div class="msg">It will be worth it, I promise to fill it with laughter, love, and good quality time 😽</div>
-  <div class="msg">ik we'll get through this like we always have 🫂</div>
-  <div class="msg">— from tikki &lt;3</div>
-</div>
+<div id="msg1" class="msg">Regardless of our fights 🤪</div>
+<div id="msg2" class="msg">I miss u sm here 😔🎀</div>
+<div id="msg3" class="msg">So meetup at my place? 🎀</div>
+<div id="msg4" class="msg">Upcoming weekend 🐙</div>
+<div id="msg5" class="msg">It will be worth it, I promise to fill it with laughter, love, and good quality time 😽</div>
+<div id="msg6" class="msg">ik we'll get through this like we always have 🫂</div>
+<div id="msg7" class="msg">— from tikki &lt;3</div>
 
 <div id="buttons" style="display:none;">
   <button id="yes">YES 😻</button>
@@ -86,11 +79,48 @@ button {
 </div>
 
 <script>
-function startMessages() {
+function start() {
   document.querySelector("button").style.display = "none";
 
-  let msgs = document.querySelectorAll(".msg");
+  let messages = ["msg1","msg2","msg3","msg4","msg5","msg6","msg7"];
 
-  msgs.forEach((el, i) => {
+  messages.forEach((id, index) => {
     setTimeout(() => {
-      el.style.opacity
+      document.getElementById(id).style.opacity = 1;
+    }, index * 2000);
+  });
+
+  setTimeout(() => {
+    document.getElementById("buttons").style.display = "block";
+  }, messages.length * 2000);
+}
+
+// YES click
+document.getElementById("yes").onclick = function() {
+  document.body.innerHTML = "<h2 style='margin-top:150px;'>Yayyy see you soon 💘</h2>";
+};
+
+// NO button moves 😂
+let no = document.getElementById("no");
+no.onmouseover = function() {
+  no.style.top = Math.random() * 80 + "%";
+  no.style.left = Math.random() * 80 + "%";
+};
+
+// floating hearts
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (10 + Math.random()*20) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}, 300);
+</script>
+
+</body>
+</html>
