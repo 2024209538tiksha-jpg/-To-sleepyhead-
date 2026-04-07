@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Meetup</title>
 
+<style>
+body {
+  background: white;
+  text-align: center;
+  font-family: Arial;
+  overflow: hidden;
+}
+
+h1 {
+  margin-top: 120px;
+  font-size: 40px;
+}
+
+.msg {
+  opacity: 0;
+  margin-top: 20px;
+  font-size: 22px;
+  transition: 1s;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+#yes {
+  background: black;
+  color: white;
+}
+
+#no {
+  background: grey;
+  color: white;
+  position: absolute;
+}
+
+/* hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  to { transform: translateY(-100vh); }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Heylo sleepyhead &lt;3</h1>
+
+<button onclick="start()">Tap here</button>
+
+<div id="msg1" class="msg">Regardless of our fights 🤪</div>
+<div id="msg2" class="msg">I miss u sm here 😔🎀</div>
+<div id="msg3" class="msg">So meetup at my place? 🎀</div>
+<div id="msg4" class="msg">Upcoming weekend 🐙</div>
+<div id="msg5" class="msg">It will be worth it, I promise to fill it with laughter, love, and good quality time 😽</div>
+<div id="msg6" class="msg">ik we'll get through this like we always have 🫂</div>
+<div id="msg7" class="msg">— from tikki &lt;3</div>
+
+<div id="buttons" style="display:none;">
+  <button id="yes">YES 😻</button>
+  <button id="no">NO 😾</button>
+</div>
+
+<script>
+function start() {
+  document.querySelector("button").style.display = "none";
+
+  let ids = ["msg1","msg2","msg3","msg4","msg5","msg6","msg7"];
+
+  ids.forEach((id, i) => {
+    setTimeout(() => {
+      document.getElementById(id).style.opacity = 1;
+    }, i * 2000);
+  });
+
+  setTimeout(() => {
+    document.getElementById("buttons").style.display = "block";
+  }, ids.length * 2000);
+}
+
+// yes
+document.getElementById("yes").onclick = function() {
+  document.body.innerHTML = "<h2 style='margin-top:150px;'>Yayyy see you soon 💘</h2>";
+};
+
+// no run 😂
+let no = document.getElementById("no");
+no.onmouseover = function() {
+  no.style.top = Math.random()*80 + "%";
+  no.style.left = Math.random()*80 + "%";
+};
+
+// hearts
+setInterval(() => {
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤";
+  h.style.left = Math.random()*100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},300);
+</script>
+
+</body>
+</html>
