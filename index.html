@@ -2,70 +2,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For you</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+<title>Meetup</title>
 
 <style>
 body {
   margin: 0;
-  background: #ffffff;
-  color: #000;
-  font-family: 'Inter', sans-serif;
+  font-family: Arial, sans-serif;
   text-align: center;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  color: white;
   overflow: hidden;
 }
 
 h1 {
   margin-top: 120px;
-  font-family: 'Playfair Display', serif;
   font-size: 42px;
 }
 
-#text {
+#messages {
   margin-top: 40px;
-  font-size: 22px;
-  line-height: 1.6;
+}
+
+.msg {
+  font-size: 26px;
+  margin-top: 20px;
   opacity: 0;
-  transition: opacity 1.2s ease;
+  transition: opacity 1s ease;
 }
 
-/* button */
-#start {
-  margin-top: 40px;
-  padding: 10px 24px;
+/* buttons */
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
   border-radius: 25px;
-  border: none;
-  background: black;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-/* yes no */
-#buttons {
-  margin-top: 30px;
-  display: none;
-}
-
-#yes {
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  background: black;
-  color: white;
   margin: 10px;
   cursor: pointer;
 }
 
+#yes {
+  background: white;
+  color: #ff4d6d;
+}
+
 #no {
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  background: grey;
+  background: #ff4d6d;
   color: white;
   position: absolute;
-  cursor: pointer;
 }
 
 /* hearts */
@@ -73,7 +56,6 @@ h1 {
   position: absolute;
   bottom: -50px;
   animation: float 6s linear infinite;
-  color: red;
 }
 
 @keyframes float {
@@ -84,58 +66,46 @@ h1 {
 
 <body>
 
-<h1>heylo sleepyhead &lt;3</h1>
+<h1>Heylo sleepyhead &lt;3</h1>
 
-<div id="text"></div>
+<button onclick="startMessages()">Start 💖</button>
 
-<button id="start">tap here…</button>
+<div id="messages">
+  <div class="msg">Regardless of our fights 🤪</div>
+  <div class="msg">I miss u sm here 😔🎀</div>
+  <div class="msg">Meetup at my place? 😘</div>
+  <div class="msg">Upcoming weekend 🐙</div>
+  <div class="msg">It will be worth it, I promise to fill it with laughter, love, and good quality time 😽</div>
+  <div class="msg">ik we'll get through this like we always have 🫂</div>
+  <div class="msg">— from tikki &lt;3</div>
+</div>
 
-<div id="buttons">
+<div id="buttons" style="display:none;">
   <button id="yes">YES 😻</button>
   <button id="no">NO 😾</button>
 </div>
 
 <script>
-let msgs = [
-  "Regardless of our fights… 🤪",
-  "I miss you… more than I say 😔🎀",
-  "So meetup at my place 🎀",
-  "Upcoming weekend 🐙",
-  "It will be worth it, I promise to fill it with laughter, love, and good quality time 😽",
-  "It will include good talking session at terrace, endless cuddles, hugs n kisses and your favorite meal with dessert 😋",
-  "ik we'll get through this like we always have 🫂",
-  "— from tikki"
-];
+function startMessages() {
+  document.querySelector("button").style.display = "none";
 
-let i = 0;
+  let msgs = document.querySelectorAll(".msg");
 
-function start() {
-  document.getElementById("start").style.display = "none";
-  show();
-}
-
-function show() {
-  let text = document.getElementById("text");
-
-  if (i < msgs.length) {
-    text.style.opacity = 0;
-
+  msgs.forEach((el, i) => {
     setTimeout(() => {
-      text.innerText = msgs[i];
-      text.style.opacity = 1;
-      i++;
-      setTimeout(show, 3000);
-    }, 500);
-  } else {
+      el.style.opacity = 1;
+    }, i * 2500);
+  });
+
+  // show buttons after last message
+  setTimeout(() => {
     document.getElementById("buttons").style.display = "block";
-  }
+  }, msgs.length * 2500);
 }
 
-document.getElementById("start").onclick = start;
-
-// YES
+// YES click
 document.getElementById("yes").onclick = function() {
-  document.getElementById("text").innerText = "see you soon 💘";
+  document.getElementById("messages").innerHTML = "<h2>Yayyy see you soon 💘</h2>";
 };
 
 // NO move 😂
@@ -149,12 +119,11 @@ no.onmouseover = function() {
 setInterval(() => {
   let h = document.createElement("div");
   h.className = "heart";
-  h.innerHTML = "❤";
+  h.innerHTML = "💖";
   h.style.left = Math.random() * 100 + "vw";
-  h.style.fontSize = (12 + Math.random()*20) + "px";
   document.body.appendChild(h);
   setTimeout(() => h.remove(), 6000);
-}, 400);
+}, 300);
 </script>
 
 </body>
